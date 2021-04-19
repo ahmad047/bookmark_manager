@@ -18,6 +18,5 @@ group :test do
 end
 
 group :hosting do
-  gem 'launchy'
   gem 'rack'
 end
