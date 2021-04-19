@@ -20,3 +20,7 @@ end
 group :hosting do
   gem 'rack'
 end
+
+group :database do
+  gem 'pg'
+end
