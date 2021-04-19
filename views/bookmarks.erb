@@ -1,2 +1,4 @@
-<h2>Bookmarks</h2>
-<%= @bookmark_manager_list %>
+<h2>Bookmark Manager</h2>
+<% @bookmark_manager_list.each do |bookmark| %>
+  <li><%= bookmark %>
+<% end %>

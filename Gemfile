@@ -1,6 +1,8 @@
-source "https://rubygems.org"
+# frozen_string_literal: true
 
-git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
+source 'https://rubygems.org'
+
+git_source(:github) { |repo_name| "https://github.com/#{repo_name}" }
 
 group :web_framework do
   gem 'sinatra'
@@ -8,13 +10,14 @@ group :web_framework do
   gem 'webrick'
 end
 
-
 group :test do
   gem 'capybara'
   gem 'rspec'
+  gem 'simplecov'
+  gem 'simplecov-console'
 end
 
 group :hosting do
-  gem 'rack'
   gem 'launchy'
+  gem 'rack'
 end
