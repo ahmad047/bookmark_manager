@@ -2,7 +2,7 @@
 
 feature 'shows Bookmarks page' do
   scenario 'it visits /bookmarks' do
-    visit '/bookmarks'
+    visit '/'
     expect(page).to have_content('Bookmark Manager')
   end
 
@@ -17,5 +17,13 @@ feature 'shows Bookmarks page' do
     expect(page).to have_content('https://www.bbc.co.uk/news')
     expect(page).to have_content('https://www.google.com/')
     expect(page).to have_content('https://www.codewars.com/dashboard')
+  end
+
+  describe '.create' do
+    it 'creates a new bookmark' do
+      BookmarkManager.create(url: 'http://www.testbookmark.com')
+
+      expect(BookmarkManager.list_all).to include 'http://www.testbookmark.com'
+    end
   end
 end

@@ -16,7 +16,16 @@ class BM < Sinatra::Base
 
   get '/bookmarks' do
     @bookmark_manager_list = BookmarkManager.list_all
-    erb :bookmarks
+    erb :"bookmarks/index"
+  end
+
+  get '/bookmarks/new' do
+    erb :"bookmarks/new"
+  end
+
+  post '/bookmarks' do
+    BookmarkManager.create(url: params[:url])
+    redirect '/bookmarks'
   end
 
   run! if app_file == $PROGRAM_NAME

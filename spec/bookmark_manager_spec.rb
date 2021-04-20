@@ -8,11 +8,9 @@ describe BookmarkManager do
   end
 
   it 'returns a list of bookmarks' do
-    connection = PG.connect(dbname: 'bookmark_manager_test')
-
-    connection.exec("INSERT INTO bookmarks (url) VALUES ('https://www.bbc.co.uk/news');")
-    connection.exec("INSERT INTO bookmarks (url) VALUES('https://www.google.com/');")
-    connection.exec("INSERT INTO bookmarks (url) VALUES('https://www.codewars.com/dashboard');")
+    BookmarkManager.create(url: 'https://www.bbc.co.uk/news')
+    BookmarkManager.create(url: 'https://www.google.com/')
+    BookmarkManager.create(url: 'https://www.codewars.com/dashboard')
 
     bookmarks = BookmarkManager.list_all
 

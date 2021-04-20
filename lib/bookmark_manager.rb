@@ -1,14 +1,25 @@
 # frozen_string_literal: true
+
 require 'pg'
 
 class BookmarkManager
   def self.list_all
-    if ENV['ENVIRONMENT'] == 'test'
-      connection = PG.connect(dbname: 'bookmark_manager_test')
-    else
-      connection = PG.connect(dbname: 'bookmark_manager')
-    end
-    result = connection.exec("SELECT * FROM bookmarks;")
+    connection = if ENV['ENVIRONMENT'] == 'test'
+                   PG.connect(dbname: 'bookmark_manager_test')
+                 else
+                   PG.connect(dbname: 'bookmark_manager')
+                 end
+    result = connection.exec('SELECT * FROM bookmarks;')
     result.map { |bookmark| bookmark['url'] }
+  end
+
+  def self.create(url:)
+    connection = if ENV['ENVIRONMENT'] == 'test'
+                   PG.connect(dbname: 'bookmark_manager_test')
+                 else
+                   PG.connect(dbname: 'bookmark_manager')
+                 end
+
+    connection.exec("INSERT INTO bookmarks (url) VALUES('#{url}')")
   end
 end
