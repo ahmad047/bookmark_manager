@@ -8,10 +8,16 @@ describe BookmarkManager do
   end
 
   it 'returns a list of bookmarks' do
+    connection = PG.connect(dbname: 'bookmark_manager_test')
+
+    connection.exec("INSERT INTO bookmarks (url) VALUES ('https://www.bbc.co.uk/news');")
+    connection.exec("INSERT INTO bookmarks (url) VALUES('https://www.google.com/');")
+    connection.exec("INSERT INTO bookmarks (url) VALUES('https://www.codewars.com/dashboard');")
+
     bookmarks = BookmarkManager.list_all
 
     expect(bookmarks).to include 'https://www.bbc.co.uk/news'
-    expect(bookmarks).to include 'https://www.google.com/'
+    expect(bookmarks).to include 'https://www.bbc.co.uk/news'
     expect(bookmarks).to include 'https://www.codewars.com/dashboard'
   end
 end

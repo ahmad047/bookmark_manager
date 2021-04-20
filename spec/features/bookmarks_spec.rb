@@ -7,6 +7,12 @@ feature 'shows Bookmarks page' do
   end
 
   scenario 'shows bookmarks' do
+    connection = PG.connect(dbname: 'bookmark_manager_test')
+
+    connection.exec("INSERT INTO bookmarks VALUES(1, 'https://www.bbc.co.uk/news');")
+    connection.exec("INSERT INTO bookmarks VALUES(2, 'https://www.google.com/');")
+    connection.exec("INSERT INTO bookmarks VALUES(3, 'https://www.codewars.com/dashboard');")
+
     visit '/bookmarks'
     expect(page).to have_content('https://www.bbc.co.uk/news')
     expect(page).to have_content('https://www.google.com/')
