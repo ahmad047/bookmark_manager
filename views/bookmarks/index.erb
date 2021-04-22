@@ -1,4 +1,10 @@
 <h2>Bookmark Manager</h2>
-<% @bookmark_manager_list.each do |bookmark| %>
-  <li><%= bookmark %>
-<% end %>
+<ul>
+  <% @bookmark_manager_list.each do |bookmark| %>
+    <li>
+      <a href="<%= bookmark.url %>">
+        <%= bookmark.title %>
+      </a>
+    </li>
+  <% end %>
+</ul>
