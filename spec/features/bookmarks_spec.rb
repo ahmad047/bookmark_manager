@@ -7,9 +7,7 @@ feature 'shows Bookmarks page' do
   end
 
   scenario 'shows bookmarks' do
-    BookmarkManager.create(title: 'bbc', url: 'https://www.bbc.co.uk/news')
-    BookmarkManager.create(title: 'google', url: 'https://www.google.com/')
-    BookmarkManager.create(title: 'codewars', url: 'https://www.codewars.com/dashboard')
+    create_test_bookmarks
 
     visit '/bookmarks'
     expect(page).to have_link('bbc', href: 'https://www.bbc.co.uk/news')
