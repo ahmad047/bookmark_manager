@@ -7,23 +7,13 @@ feature 'shows Bookmarks page' do
   end
 
   scenario 'shows bookmarks' do
-    connection = PG.connect(dbname: 'bookmark_manager_test')
-
-    connection.exec("INSERT INTO bookmarks VALUES(1, 'https://www.bbc.co.uk/news');")
-    connection.exec("INSERT INTO bookmarks VALUES(2, 'https://www.google.com/');")
-    connection.exec("INSERT INTO bookmarks VALUES(3, 'https://www.codewars.com/dashboard');")
+    BookmarkManager.create(url: 'https://www.bbc.co.uk/news')
+    BookmarkManager.create(url: 'https://www.google.com/')
+    BookmarkManager.create(url: 'https://www.codewars.com/dashboard')
 
     visit '/bookmarks'
     expect(page).to have_content('https://www.bbc.co.uk/news')
     expect(page).to have_content('https://www.google.com/')
     expect(page).to have_content('https://www.codewars.com/dashboard')
-  end
-
-  describe '.create' do
-    it 'creates a new bookmark' do
-      BookmarkManager.create(url: 'http://www.testbookmark.com')
-
-      expect(BookmarkManager.list_all).to include 'http://www.testbookmark.com'
-    end
   end
 end

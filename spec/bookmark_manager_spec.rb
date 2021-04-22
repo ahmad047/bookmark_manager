@@ -18,4 +18,12 @@ describe BookmarkManager do
     expect(bookmarks).to include 'https://www.bbc.co.uk/news'
     expect(bookmarks).to include 'https://www.codewars.com/dashboard'
   end
+
+  describe '.create' do
+    it 'creates a new bookmark' do
+      BookmarkManager.create(url: 'http://www.testbookmark.com')
+
+      expect(BookmarkManager.list_all).to include 'http://www.testbookmark.com'
+    end
+  end
 end
