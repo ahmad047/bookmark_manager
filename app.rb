@@ -3,6 +3,7 @@
 require 'sinatra/base'
 require 'sinatra/reloader'
 require './lib/bookmark_manager'
+require './database_connection_setup'
 
 class BM < Sinatra::Base
   configure :development do
