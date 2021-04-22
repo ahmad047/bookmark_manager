@@ -30,6 +30,11 @@ describe BookmarkManager do
 
       expect(BookmarkManager.list_all.length).to eq 1
     end
+
+    it 'does not create a new bookmark if the URL is not valid' do
+      BookmarkManager.create(url: 'not a real bookmark', title: 'not a real bookmark')
+      expect(BookmarkManager.list_all).to be_empty
+    end
   end
 
   describe '.delete' do
@@ -45,9 +50,9 @@ describe BookmarkManager do
     it 'updates a bookmark' do
       BookmarkManager.create(title: 'bbc', url: 'https://www.bbc.co.uk/news')
       id_to_update = BookmarkManager.list_all[0].id
-      BookmarkManager.update(id: id_to_update, title: 'not_bbc', url: 'www.not_bbc.com')
+      BookmarkManager.update(id: id_to_update, title: 'not_bbc', url: 'https://www.notbbc.co.uk/news')
       expect(BookmarkManager.list_all[0].title).to eq 'not_bbc'
-      expect(BookmarkManager.list_all[0].url).to eq 'www.not_bbc.com'
+      expect(BookmarkManager.list_all[0].url).to eq 'https://www.notbbc.co.uk/news'
 
     end
   end

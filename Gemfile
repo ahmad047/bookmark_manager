@@ -8,6 +8,7 @@ group :web_framework do
   gem 'sinatra'
   gem 'sinatra-contrib'
   gem 'webrick'
+  gem 'sinatra-flash'
 end
 
 group :test do
