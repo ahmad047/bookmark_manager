@@ -40,4 +40,28 @@ describe BookmarkManager do
       expect(BookmarkManager.list_all).to be_empty
     end
   end
+
+  describe '.update' do
+    it 'updates a bookmark' do
+      BookmarkManager.create(title: 'bbc', url: 'https://www.bbc.co.uk/news')
+      id_to_update = BookmarkManager.list_all[0].id
+      BookmarkManager.update(id: id_to_update, title: 'not_bbc', url: 'www.not_bbc.com')
+      expect(BookmarkManager.list_all[0].title).to eq 'not_bbc'
+      expect(BookmarkManager.list_all[0].url).to eq 'www.not_bbc.com'
+
+    end
+  end
+
+  describe '.find' do
+    it 'returns the requested bookmark object' do
+      BookmarkManager.create(title: 'Makers Academy', url: 'http://www.makersacademy.com')
+      bookmark = BookmarkManager.list_all[0]
+      result = BookmarkManager.find(id: bookmark.id)
+
+      expect(result).to be_a BookmarkManager
+      expect(result.id).to eq bookmark.id
+      expect(result.title).to eq 'Makers Academy'
+      expect(result.url).to eq 'http://www.makersacademy.com'
+    end
+  end
 end
