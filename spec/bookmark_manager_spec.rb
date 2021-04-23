@@ -69,4 +69,17 @@ describe BookmarkManager do
       expect(result.url).to eq 'http://www.makersacademy.com'
     end
   end
+
+  describe '.add_comment' do
+    it 'stores the comment' do
+      BookmarkManager.create(title: 'Makers Academy', url: 'http://www.makersacademy.com')
+      bookmark = BookmarkManager.list_all[0]
+      # result = BookmarkManager.find(id: bookmark.id)
+      BookmarkManager.add_comment(id: bookmark.id, comment: 'why this kolaveri')
+
+     
+      expect(bookmark.id).to eq bookmark.id
+      expect(bookmark.comments).to include('why this kolaveri') 
+    end
+  end
 end
